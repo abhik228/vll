@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Catch Me !!muuheehe</title>
+<style>
+body{
+margin:0;
+overflow:hidden;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+text-align:center;
+color:white;
+}
+#yesBtn{
+position:absolute;
+padding:25px 50px;   /* Bigger button */
+font-size:20px;      /* Bigger text */
+border:none;
+border-radius:15px;
+background:#28a745;
+color:white;
+cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>Catch Me 💖</h1>
+<div id="score">Score: 0 / 8</div>
+<button id="yesBtn">Catch Me 😘</button>
+
+<script>
+let score=0;
+let speed=550;   // Slower starting speed
+let interval;
+const btn=document.getElementById("yesBtn");
+
+function move(){
+btn.style.left=Math.random()*(window.innerWidth-220)+"px";
+btn.style.top=Math.random()*(window.innerHeight-120)+"px";
+}
+
+function start(){
+interval=setInterval(move,speed);
+}
+
+btn.onclick=function(){
+score++;
+document.getElementById("score").innerText="Score: "+score+" / 8";
+
+if(speed>300){      // Prevent becoming too fast
+speed-=10;          // Slower increase
+clearInterval(interval);
+start();
+}
+
+if(score>=8){
+clearInterval(interval);
+window.location.href="message.html";
+}
+};
+
+move();
+start();
+</script>
+
+</body>
+</html>
