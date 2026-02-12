@@ -14,8 +14,8 @@ color:white;
 }
 #yesBtn{
 position:absolute;
-padding:25px 50px;   /* Bigger button */
-font-size:20px;      /* Bigger text */
+padding:25px 50px;
+font-size:20px;
 border:none;
 border-radius:15px;
 background:#28a745;
@@ -31,38 +31,42 @@ cursor:pointer;
 <button id="yesBtn">Catch Me 😘</button>
 
 <script>
-let score=0;
-let speed=550;   // Slower starting speed
-let interval;
-const btn=document.getElementById("yesBtn");
+let score = 0;
+let speed = 600;   // Slower start
+let interval = null;
+const btn = document.getElementById("yesBtn");
+const scoreDisplay = document.getElementById("score");
 
 function move(){
-btn.style.left=Math.random()*(window.innerWidth-220)+"px";
-btn.style.top=Math.random()*(window.innerHeight-120)+"px";
+btn.style.left = Math.random() * (window.innerWidth - 220) + "px";
+btn.style.top = Math.random() * (window.innerHeight - 120) + "px";
 }
 
-function start(){
-interval=setInterval(move,speed);
+function startMoving(){
+if(interval) clearInterval(interval);
+interval = setInterval(move, speed);
 }
 
-btn.onclick=function(){
+btn.addEventListener("click", function(){
+
 score++;
-document.getElementById("score").innerText="Score: "+score+" / 8";
+scoreDisplay.innerText = "Score: " + score + " / 8";
 
-if(speed>300){      // Prevent becoming too fast
-speed-=10;          // Slower increase
+if(score >= 8){
 clearInterval(interval);
-start();
+window.location.href = "message.html";
+return;
 }
 
-if(score>=8){
-clearInterval(interval);
-window.location.href="message.html";
+if(speed > 350){
+speed -= 15;   // gentle speed increase
 }
-};
+
+startMoving();
+});
 
 move();
-start();
+startMoving();
 </script>
 
 </body>
