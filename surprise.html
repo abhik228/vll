@@ -32,8 +32,6 @@ cursor:pointer;
 
 <script>
 let score = 0;
-let speed = 600;   // Slower start
-let interval = null;
 const btn = document.getElementById("yesBtn");
 const scoreDisplay = document.getElementById("score");
 
@@ -42,10 +40,8 @@ btn.style.left = Math.random() * (window.innerWidth - 220) + "px";
 btn.style.top = Math.random() * (window.innerHeight - 120) + "px";
 }
 
-function startMoving(){
-if(interval) clearInterval(interval);
-interval = setInterval(move, speed);
-}
+// Move every 2 seconds
+setInterval(move, 2000);
 
 btn.addEventListener("click", function(){
 
@@ -53,20 +49,10 @@ score++;
 scoreDisplay.innerText = "Score: " + score + " / 8";
 
 if(score >= 8){
-clearInterval(interval);
 window.location.href = "message.html";
-return;
 }
 
-if(speed > 350){
-speed -= 15;   // gentle speed increase
-}
-
-startMoving();
 });
-
-move();
-startMoving();
 </script>
 
 </body>
